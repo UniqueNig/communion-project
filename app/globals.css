@@ -1,26 +1,87 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-accent-ink: var(--accent-ink);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-bricolage);
+
+  --color-gold-300: #fbd88a;
+  --color-gold-400: #f7c765;
+  --color-gold-500: #f5b942;
+  --color-gold-600: #f97316;
+
+  --color-violet-400: #8b5cf6;
+  --color-violet-500: #6d28d9;
+  --color-violet-600: #4338ca;
+
+  --color-charcoal-950: #07070c;
+  --color-charcoal-900: #0b0b12;
+  --color-charcoal-800: #14131f;
+  --color-charcoal-700: #1d1b2e;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #faf7f2;
+  --foreground: #0b0b12;
+  --accent-ink: #b45309;
+}
+
+.dark {
+  --background: #0b0b12;
+  --foreground: #f5f3f0;
+  --accent-ink: #fbd88a;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+@layer utilities {
+  .glass-panel {
+    background: rgba(11, 11, 18, 0.04);
+    border: 1px solid rgba(11, 11, 18, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 8px 30px rgba(11, 11, 18, 0.06);
+  }
+
+  .dark .glass-panel {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: none;
+  }
+
+  .text-gradient-gold {
+    background: linear-gradient(135deg, var(--color-gold-600), var(--color-gold-500));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .dark .text-gradient-gold {
+    background: linear-gradient(135deg, var(--color-gold-300), var(--color-gold-600));
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  .bg-mesh-dawn {
+    background-color: var(--color-background);
+    background-image:
+      radial-gradient(circle at 15% 20%, color-mix(in srgb, var(--color-gold-500) 22%, transparent), transparent 45%),
+      radial-gradient(circle at 85% 15%, color-mix(in srgb, var(--color-violet-500) 22%, transparent), transparent 50%),
+      radial-gradient(circle at 50% 90%, color-mix(in srgb, var(--color-gold-600) 14%, transparent), transparent 55%);
+  }
+
+  .dark .bg-mesh-dawn {
+    background-image:
+      radial-gradient(circle at 15% 20%, rgba(245, 185, 66, 0.35), transparent 45%),
+      radial-gradient(circle at 85% 15%, rgba(109, 40, 217, 0.4), transparent 50%),
+      radial-gradient(circle at 50% 90%, rgba(249, 115, 22, 0.22), transparent 55%);
+  }
 }
