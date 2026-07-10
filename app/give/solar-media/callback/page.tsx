@@ -18,7 +18,11 @@ type ResolvedSearchParams = {
 type Status = "success" | "pending" | "failed";
 
 async function resolveStatus(params: ResolvedSearchParams): Promise<Status> {
-  await connectToDatabase();
+  try {
+    await connectToDatabase();
+  } catch {
+    return "pending";
+  }
 
   if (params.provider === "paystack") {
     const reference = params.reference ?? params.trxref;
