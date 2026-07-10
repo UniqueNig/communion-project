@@ -26,8 +26,9 @@ export async function POST(request: Request) {
             { status: "success" }
           );
         }
-      } catch {
+      } catch (err) {
         // Verification call failed; Flutterwave will retry the webhook.
+        console.error("[webhook:flutterwave] verification failed:", err);
       }
     }
   }

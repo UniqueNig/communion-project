@@ -36,8 +36,9 @@ export async function POST(request: Request) {
             { status: "success" }
           );
         }
-      } catch {
+      } catch (err) {
         // Verification call failed; Paystack will retry the webhook.
+        console.error("[webhook:paystack] verification failed:", err);
       }
     }
   }

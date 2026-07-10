@@ -20,7 +20,8 @@ type Status = "success" | "pending" | "failed";
 async function resolveStatus(params: ResolvedSearchParams): Promise<Status> {
   try {
     await connectToDatabase();
-  } catch {
+  } catch (err) {
+    console.error("[callback] MongoDB connection failed:", err);
     return "pending";
   }
 
@@ -37,7 +38,8 @@ async function resolveStatus(params: ResolvedSearchParams): Promise<Status> {
         return "success";
       }
       return "failed";
-    } catch {
+    } catch (err) {
+      console.error("[callback] Paystack verification failed:", err);
       return "pending";
     }
   }
@@ -56,7 +58,8 @@ async function resolveStatus(params: ResolvedSearchParams): Promise<Status> {
         return "success";
       }
       return "failed";
-    } catch {
+    } catch (err) {
+      console.error("[callback] Flutterwave verification failed:", err);
       return "pending";
     }
   }

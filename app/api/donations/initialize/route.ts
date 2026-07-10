@@ -39,7 +39,8 @@ export async function POST(request: Request) {
 
   try {
     await connectToDatabase();
-  } catch {
+  } catch (err) {
+    console.error("[donations/initialize] MongoDB connection failed:", err);
     return NextResponse.json(
       { error: "Giving isn't set up yet. Please check back shortly." },
       { status: 503 }
@@ -82,6 +83,7 @@ export async function POST(request: Request) {
     });
     return NextResponse.json({ url: data.link });
   } catch (err) {
+    console.error(`[donations/initialize] ${provider} initialization failed:`, err);
     await Donation.updateOne({ reference }, { status: "failed" });
     const message =
       err instanceof Error ? err.message : "Payment initialization failed.";
