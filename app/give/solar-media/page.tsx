@@ -104,7 +104,7 @@ export default async function SolarMediaPage() {
           </Reveal>
           <Reveal delay={0.15}>
             <CampaignImage
-              src="/images/campaign/hero-worship.jpg"
+              src="/images/campaign/hero-worship.jpeg"
               alt="TCC worship service"
               containerClassName="rounded-3xl h-[420px] w-full glass-panel"
               className="h-full w-full object-cover"

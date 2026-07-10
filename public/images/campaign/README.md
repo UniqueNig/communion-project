@@ -4,8 +4,10 @@ Drop photos/videos here as you get them. Suggested filenames (the page will
 be built to slot these in, using these names means no code changes needed
 when you add them):
 
-- `hero-worship.jpg`: a strong worship/congregation shot for the page's hero
+- `hero-worship.jpeg`: a strong worship/congregation shot for the page's hero
   background (wide/landscape, this one matters most for first impressions).
+  The filename must match exactly, including the extension (`.jpeg`, not
+  `.jpg`), or the page won't find it.
 - `building-exterior.jpg`: the church building.
 - `generator-current.jpg`: the current generator setup (for "the situation"
   section; the noise/fuel/unreliability story lands harder with a real photo).
