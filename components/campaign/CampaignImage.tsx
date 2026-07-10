@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type CampaignImageProps = {
   src: string;
@@ -20,8 +20,18 @@ export function CampaignImage({
   className = "",
   containerClassName = "",
 }: CampaignImageProps) {
+  const imgRef = useRef<HTMLImageElement>(null);
   const [failed, setFailed] = useState(false);
   const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    // If the image was already served from cache, the load event can fire
+    // before this component mounts and attaches the handler below, leaving
+    // it stuck at opacity-0. Catch that case here.
+    if (imgRef.current?.complete && imgRef.current.naturalWidth > 0) {
+      setLoaded(true);
+    }
+  }, []);
 
   return (
     <div
@@ -30,6 +40,7 @@ export function CampaignImage({
       {!failed && (
         // eslint-disable-next-line @next/next/no-img-element
         <img
+          ref={imgRef}
           src={src}
           alt={alt}
           onError={() => setFailed(true)}

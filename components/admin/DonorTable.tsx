@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { Trash2, LogOut } from "lucide-react";
+import { ConfirmDialog } from "@/components/admin/ConfirmDialog";
 
 type Currency = "NGN" | "USD";
 type Status = "pending" | "success" | "failed";
@@ -33,6 +34,7 @@ const STATUS_STYLE: Record<Status, string> = {
 export function DonorTable({ donations }: { donations: DonationRow[] }) {
   const [rows, setRows] = useState(donations);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [confirmId, setConfirmId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const totals = useMemo(() => {
@@ -46,10 +48,9 @@ export function DonorTable({ donations }: { donations: DonationRow[] }) {
     return { count: rows.length, ngn, usd };
   }, [rows]);
 
-  async function handleDelete(id: string) {
-    if (!window.confirm("Delete this donation record? This can't be undone.")) {
-      return;
-    }
+  async function confirmDelete() {
+    if (!confirmId) return;
+    const id = confirmId;
     setError(null);
     setDeletingId(id);
     try {
@@ -64,6 +65,7 @@ export function DonorTable({ donations }: { donations: DonationRow[] }) {
       setError("Could not reach the server. Please try again.");
     } finally {
       setDeletingId(null);
+      setConfirmId(null);
     }
   }
 
@@ -137,7 +139,7 @@ export function DonorTable({ donations }: { donations: DonationRow[] }) {
                   <td className="px-4 py-3">
                     <button
                       type="button"
-                      onClick={() => handleDelete(row._id)}
+                      onClick={() => setConfirmId(row._id)}
                       disabled={deletingId === row._id}
                       aria-label="Delete record"
                       className="text-foreground/40 hover:text-red-500 transition-colors cursor-pointer disabled:opacity-40"
@@ -158,6 +160,16 @@ export function DonorTable({ donations }: { donations: DonationRow[] }) {
           </table>
         </div>
       </div>
+
+      <ConfirmDialog
+        open={confirmId !== null}
+        title="Delete this donation record?"
+        message="This can't be undone."
+        confirmLabel="Delete"
+        loading={deletingId === confirmId}
+        onConfirm={confirmDelete}
+        onCancel={() => setConfirmId(null)}
+      />
     </div>
   );
 }
