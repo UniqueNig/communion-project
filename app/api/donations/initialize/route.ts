@@ -20,8 +20,8 @@ export async function POST(request: Request) {
     currency?: string;
   };
 
-  if (!name || typeof name !== "string" || !name.trim()) {
-    return NextResponse.json({ error: "Please enter your name." }, { status: 400 });
+  if (name !== undefined && typeof name !== "string") {
+    return NextResponse.json({ error: "Please enter a valid name." }, { status: 400 });
   }
   if (!email || typeof email !== "string" || !EMAIL_RE.test(email)) {
     return NextResponse.json(
@@ -50,7 +50,7 @@ export async function POST(request: Request) {
   const reference = `tcc-${randomUUID()}`;
   const provider = currency === "NGN" ? "paystack" : "flutterwave";
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-  const trimmedName = name.trim();
+  const trimmedName = name?.trim() || "Anonymous";
   const trimmedEmail = email.trim().toLowerCase();
 
   await Donation.create({

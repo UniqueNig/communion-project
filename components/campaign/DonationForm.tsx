@@ -52,7 +52,6 @@ export function DonationForm({ currency, onCurrencyChange }: DonationFormProps) 
     e.preventDefault();
     setError(null);
 
-    if (!name.trim()) return setError("Please enter your name.");
     if (!email.trim() || !email.includes("@"))
       return setError("Please enter a valid email address.");
     if (!amount || amount <= 0)
@@ -140,7 +139,7 @@ export function DonationForm({ currency, onCurrencyChange }: DonationFormProps) 
       <div className="grid sm:grid-cols-2 gap-3">
         <input
           type="text"
-          placeholder="Full name"
+          placeholder="Full name (optional)"
           value={name}
           onChange={(e) => setName(e.target.value)}
           className="rounded-xl border border-foreground/10 bg-foreground/3 px-4 py-2.5 text-foreground placeholder:text-foreground/40 outline-none focus:border-gold-500 transition-colors"
@@ -153,6 +152,9 @@ export function DonationForm({ currency, onCurrencyChange }: DonationFormProps) 
           className="rounded-xl border border-foreground/10 bg-foreground/3 px-4 py-2.5 text-foreground placeholder:text-foreground/40 outline-none focus:border-gold-500 transition-colors"
         />
       </div>
+      <p className="text-xs text-foreground/40 -mt-3">
+        Leave your name blank to give anonymously.
+      </p>
 
       {error && <p className="text-sm text-red-500">{error}</p>}
 
