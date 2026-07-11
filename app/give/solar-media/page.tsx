@@ -118,7 +118,7 @@ export default async function SolarMediaPage() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <Reveal className="order-2 lg:order-1">
             <CampaignImage
-              src="/images/campaign/generator-current.jpg"
+              src="/images/campaign/generator-current.jpeg"
               alt="TCC's current generator setup"
               containerClassName="rounded-3xl h-[340px] w-full glass-panel"
               className="h-full w-full object-cover"

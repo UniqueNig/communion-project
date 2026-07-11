@@ -9,7 +9,7 @@ when you add them):
   The filename must match exactly, including the extension (`.jpeg`, not
   `.jpg`), or the page won't find it.
 - `building-exterior.jpg`: the church building.
-- `generator-current.jpg`: the current generator setup (for "the situation"
+- `generator-current.jpeg`: the current generator setup (for "the situation"
   section; the noise/fuel/unreliability story lands harder with a real photo).
 - `worship-service.jpg`: a service/congregation photo.
 - `media-team.jpg`: the sound/media/livestream team or current equipment.
