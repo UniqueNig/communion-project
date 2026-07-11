@@ -25,6 +25,7 @@ export function GiveSection({ raisedNGN, goalNGN, percent, usdRate }: GiveSectio
 
   const raised = currency === "NGN" ? raisedNGN : raisedNGN / usdRate;
   const goal = currency === "NGN" ? goalNGN : goalNGN / usdRate;
+  const remaining = Math.ceil(Math.max(goal - raised, 0));
 
   return (
     <div className="grid lg:grid-cols-2 gap-14 items-start">
@@ -60,7 +61,11 @@ export function GiveSection({ raisedNGN, goalNGN, percent, usdRate }: GiveSectio
         </div>
       </Reveal>
       <Reveal delay={0.1}>
-        <DonationForm currency={currency} onCurrencyChange={setCurrency} />
+        <DonationForm
+          currency={currency}
+          onCurrencyChange={setCurrency}
+          remaining={remaining}
+        />
       </Reveal>
     </div>
   );

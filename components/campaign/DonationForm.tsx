@@ -19,9 +19,14 @@ function formatAmount(amount: number, currency: Currency) {
 type DonationFormProps = {
   currency: Currency;
   onCurrencyChange: (currency: Currency) => void;
+  remaining: number;
 };
 
-export function DonationForm({ currency, onCurrencyChange }: DonationFormProps) {
+export function DonationForm({
+  currency,
+  onCurrencyChange,
+  remaining,
+}: DonationFormProps) {
   const [selectedPreset, setSelectedPreset] = useState<number | null>(
     PRESETS.NGN[1]
   );
@@ -39,6 +44,11 @@ export function DonationForm({ currency, onCurrencyChange }: DonationFormProps) 
   function handlePresetClick(amount: number) {
     setSelectedPreset(amount);
     setCustomAmount("");
+  }
+
+  function handleGiveRemaining() {
+    setCustomAmount(String(remaining));
+    setSelectedPreset(null);
   }
 
   function handleCustomChange(value: string) {
@@ -110,6 +120,26 @@ export function DonationForm({ currency, onCurrencyChange }: DonationFormProps) 
 
       <div>
         <p className="text-sm text-foreground/60 mb-3">Choose an amount</p>
+        {remaining > 0 ? (
+          <button
+            type="button"
+            onClick={handleGiveRemaining}
+            className="mb-3 flex w-full items-center justify-between gap-3 rounded-xl border border-gold-500/30 bg-gold-500/10 px-4 py-2.5 text-left transition-colors hover:border-gold-500/50 cursor-pointer"
+          >
+            <span className="text-sm text-foreground/70">
+              {formatAmount(remaining, currency)} still needed to reach the
+              goal. Giving more than this is very welcome too.
+            </span>
+            <span className="whitespace-nowrap text-sm font-semibold text-accent-ink">
+              Give this amount
+            </span>
+          </button>
+        ) : (
+          <p className="mb-3 text-sm text-foreground/60">
+            This project has been fully funded. Any additional gift goes
+            toward the next season of ministry.
+          </p>
+        )}
         <div className="grid grid-cols-3 gap-2 sm:gap-3">
           {PRESETS[currency].map((preset) => (
             <button
