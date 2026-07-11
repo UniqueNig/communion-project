@@ -23,6 +23,9 @@ export async function initializePaystackTransaction({
       currency: "NGN",
       reference,
       callback_url: callbackUrl,
+      // Explicit so bank transfer and USSD are always offered alongside
+      // card, regardless of account-level channel defaults.
+      channels: ["card", "bank_transfer", "bank", "ussd"],
     }),
   });
 

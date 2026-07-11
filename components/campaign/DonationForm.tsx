@@ -186,6 +186,15 @@ export function DonationForm({
         Leave your name blank to give anonymously.
       </p>
 
+      {currency === "NGN" && (
+        <p className="-mt-3 text-xs text-foreground/50 leading-relaxed">
+          Not comfortable entering card details online? That's
+          understandable. After clicking Give, choose Transfer on the next
+          screen and you'll get a one-time account number to pay from your
+          own banking app. No card needed.
+        </p>
+      )}
+
       {error && <p className="text-sm text-red-500">{error}</p>}
 
       <motion.button
