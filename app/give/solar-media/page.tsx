@@ -116,11 +116,11 @@ export default async function SolarMediaPage() {
       {/* The Situation */}
       <section id="situation" className="mx-auto max-w-6xl px-6 py-28">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <Reveal>
+          <Reveal className="order-2 lg:order-1">
             <CampaignImage
               src="/images/campaign/generator-current.jpg"
               alt="TCC's current generator setup"
-              containerClassName="rounded-3xl h-[340px] w-full glass-panel order-2 lg:order-1"
+              containerClassName="rounded-3xl h-[340px] w-full glass-panel"
               className="h-full w-full object-cover"
             />
           </Reveal>
