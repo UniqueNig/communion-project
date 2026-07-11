@@ -6,8 +6,8 @@ import { motion } from "motion/react";
 type Currency = "NGN" | "USD";
 
 const PRESETS: Record<Currency, number[]> = {
-  NGN: [50_000, 100_000, 200_000, 500_000, 1_000_000],
-  USD: [50, 100, 200, 500, 1000],
+  NGN: [50_000, 100_000, 200_000, 500_000, 1_000_000, 2_000_000, 5_000_000, 10_000_000],
+  USD: [50, 100, 200, 500, 1000, 2000, 3000, 6250],
 };
 
 const SYMBOL: Record<Currency, string> = { NGN: "₦", USD: "$" };
